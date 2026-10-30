@@ -1,3 +1,5 @@
+![Banner](banner.png)
+
 # cdd-configdrift-BaselineDiff
 Compares current configuration against a known good baseline, highlighting differences in a readable format (e.g., using `diff` or similar library). - Focused on This category encompasses tools designed to detect changes in configuration files over time. This allows security teams to identify unauthorized modifications, deviations from established baselines, and potential misconfigurations that could introduce security risks. The tools track and highlight differences across versions, aiding in rapid troubleshooting and remediation.
 
