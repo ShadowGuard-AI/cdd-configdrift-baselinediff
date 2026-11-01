@@ -80,6 +80,10 @@ def filter_config(config, ignore_keys):
         return config
 
     def _filter(data, keys):
+        # Ignoring is by bare key name at every depth. Ignoring a
+        # common name like password or host removes it from every
+        # section including ones the caller never meant, and there is
+        # no path form to aim it at just one place.
         if isinstance(data, dict):
             return {k: _filter(v, keys) for k, v in data.items() if k not in keys}
         elif isinstance(data, list):
@@ -168,7 +172,11 @@ def main():
         # Compare configurations
         delta = compare_configs(baseline_config, current_config, args.ignore)
 
-        # Format the diff
+        # A found diff is not an error in this tool's exit terms: the
+        # run exits 0 whether the configs match or drift, so a calling
+        # script that wants to gate on drift has to read the output
+        # text, not the exit code. The --no-color flag is accepted and
+        # passed along but no colour is ever emitted either way.
         formatted_diff = format_diff(delta, args.format, args.indent, args.no_color)
 
         # Write output
