@@ -3,160 +3,91 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cdd Configdrift Baselinediff: what it is, how it runs, where it stops</title>
-<meta name="description" content="Cdd Configdrift Baselinediff is one of my projects. The README in the repo is short, so this page sticks to what the files themselves show.">
+<title>cdd-configdrift-baselinediff: Gilder's Cushion and the draught Rule</title>
+<meta name="description" content="Compares current configuration against a known good baseline, highlighting differences in a readable format.">
 <style>
-:root {
-  --bg: #1a0c0c; --panel: #2a1412; --ink: #f0e6d6;
-  --mut: #381b18;
-  --acc: #c9a24b; --acc2: #94b2c4;
-  --line: #2a1412;
-}
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink);
-  font-family: ' Gill Sans', 'Segoe UI', sans-serif; line-height: 1.55; }
-code, pre, .mono { font-family: 'SF Mono', monospace; }
-a { color: var(--acc2); }
-.hero { padding: 3rem 6vw 1rem; }
-.hero img.banner { width: 100%; height: auto; border: 1px solid var(--line);
-  border-radius: 10px; }
-.logo { width: 92px; height: 92px; border-radius: 18px;
-  border: 1px solid var(--line); }
-h1 { font-size: 2.4rem; margin: 0.4em 0 0.1em; }
-h2 { border-bottom: 2px solid var(--acc); padding-bottom: 0.2em;
-  margin-top: 2em; }
-.lede { font-size: 1.15rem; max-width: 62ch; }
-main { padding: 0 6vw 3rem; max-width: 1180px; margin: 0 auto; }
-.grid { display: grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
-.card { background: var(--panel); border: 1px solid var(--line);
-  border-radius: 12px; padding: 1rem 1.2rem; }
-.card.pop { animation: rise 0.7s ease both; }
-@keyframes rise { from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: none; } }
-pre.code { background: #101014; color: #e8e6df; padding: 1rem 1.2rem;
-  border-radius: 12px; overflow-x: auto; font-size: 0.86rem;
-  border-left: 5px solid var(--acc); }
-table { border-collapse: collapse; width: 100%; }
-td, th { border-bottom: 1px solid var(--line); padding: 0.45rem 0.6rem;
-  text-align: left; }
-.shots { display: grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-.shots img { width: 100%; height: auto; border: 1px solid var(--line);
-  border-radius: 10px; background: #f4f1e8; }
-footer { padding: 2rem 6vw; border-top: 1px solid var(--line);
-  color: var(--mut); }
-.rail { display: flex; gap: 1.2rem; align-items: flex-start; }
-.rail nav { position: sticky; top: 1rem; min-width: 180px; }
-@media (max-width: 760px) { .rail { flex-direction: column; }
-  .rail nav { position: static; } }
-@media (prefers-reduced-motion: reduce) {
-  .card.pop { animation: none; } * { scroll-behavior: auto; } }
+@font-face{font-family:'Caveat Brush';src:url('fonts/CaveatBrush.ttf') format('truetype');}
+@font-face{font-family:'Bitter';src:url('fonts/Bitter.ttf') format('truetype');}
+:root{--indigo:#2b2a5b;--indigo2:#232247;--resist:#f6f1e4;--cotton:#e4d3ae;--copper:#b87333;--gold:#e8c33a;--ink:#262238}
+*{box-sizing:border-box}body{margin:0;background:var(--indigo2);color:var(--ink);font-family:'Bitter',serif;line-height:1.65}
+h1,h2,h3{font-family:'Caveat Brush',cursive;color:var(--indigo)}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;background:var(--indigo2)}
+.hero img.heroimg{width:100%;height:58vh;object-fit:cover;display:block}
+.hero .in{padding:1rem 6vw 2.2rem;max-width:1120px;margin:0 auto;width:100%;color:var(--resist)}
+.hero h1{color:var(--resist);font-size:2.6rem;margin:.4rem 0}
+.logo{width:200px;border-radius:4px}
+main{padding:0 6vw 3rem;max-width:1120px;margin:0 auto}
+nav{display:flex;gap:.9rem;flex-wrap:wrap;margin:1.2rem 0}
+.cushion{display:inline-block;text-decoration:none;color:var(--resist);font-family:'Caveat Brush',cursive;font-size:1.15rem;padding:.5rem 1.4rem .65rem;background:linear-gradient(180deg,#3a3874,#2b2a5b);border:3px solid #6e4a26;border-radius:46% 46% 40% 40%/26px 26px 18px 18px;box-shadow:0 3px 0 #191736;position:relative;transition:box-shadow .15s}
+.cushion:hover{box-shadow:0 3px 0 #191736,0 0 0 3px rgba(184,115,51,.55)}
+.cushion:active{transform:translateY(2px)}
+.cushion:active::after{content:'';position:absolute;left:8%;right:8%;top:46%;height:5px;background:var(--resist);opacity:.75;border-radius:3px}
+.cushion:focus-visible{outline:2px solid var(--cotton);outline-offset:4px}
+.page{background:var(--resist);border-radius:3px;box-shadow:2px 3px 0 rgba(0,0,0,.25);padding:.4rem 1.6rem 1.4rem;margin:1.8rem 0;position:relative;transform:rotate(-.25deg)}
+.page:nth-of-type(even){transform:rotate(.22deg)}
+.page::before{content:'';position:absolute;inset:7px;border:1px solid #c9c2ae;pointer-events:none}
+.page h2{font-size:1.9rem;border-bottom:1px solid #d8d0ba;padding-bottom:.3rem}
+pre{background:var(--indigo);color:var(--resist);padding:1rem;overflow-x:auto;font-size:.95rem}
+a{color:#7a4a12}
+a::before{content:'';display:inline-block;width:15px;height:11px;margin-right:.45em;vertical-align:0;background:linear-gradient(90deg,#efe9d8 49%,#d9d2ba 50%);border:1px solid #b7ad92;border-radius:1px;position:relative}
+a:hover::before{background:linear-gradient(90deg,#efe9d8 30%,var(--gold) 31%,var(--gold) 68%,#efe9d8 69%)}
+.cushion::before{content:none}
+.stroke{height:12px;margin:2.2rem 0;background:linear-gradient(90deg,var(--indigo),#746196 48%,var(--copper));border-radius:6px;position:relative}
+.stroke::after{content:'';position:absolute;left:52%;top:-3px;width:44px;height:6px;background:var(--cotton);border-radius:3px;transform:rotate(-4deg)}
+.ctl{display:flex;gap:1rem;padding:.5rem 0;border-bottom:1px solid #ddd5bf}
+.ctl b{font-family:'Caveat Brush',cursive;font-size:1.2rem;min-width:110px;color:var(--indigo)}
+.tissue{background:rgba(246,241,228,.82);border:1px solid #d8d0ba;outline:6px solid rgba(228,211,174,.4);padding:.2rem 1.3rem 1rem;margin:1.3rem 0;position:relative}
+.tissue::after{content:'';position:absolute;top:10px;right:12px;width:20px;height:20px;background:var(--gold)}
+.tissue h3{font-size:1.45rem}
+footer{padding:1rem 6vw 2.4rem;max-width:1120px;margin:0 auto;color:var(--cotton)}
 </style>
 </head>
-<body class="layout-term">
-<!-- This page exists for cdd-configdrift-baselinediff alone: the layout (terminal-frame),
-     the colors, and the type were picked for this project, not
-     shared with the other project pages. The code block below is
-     copied from the file it names, line for line. If it looks
-     plain, that is because the project is plain, and I would
-     rather the page match the project than dress it up. The one
-     thing I will not do here is oversell: what this project does
-     not do is stated on the page, not hidden from it. -->
+<body>
 <header class="hero">
-  <img class="logo" src="assets/logo.png" alt="Cdd Configdrift Baselinediff logo">
-  <img class="banner" src="assets/banner.png" alt="">
-  <h1>Cdd Configdrift Baselinediff</h1>
-  <p class="mono"><a href="https://github.com/ShadowGuard-AI/cdd-configdrift-baselinediff">github.com/ShadowGuard-AI/cdd-configdrift-baselinediff</a></p>
+<img class="heroimg" src="assets/intro-banner.png" alt="A gilding bench held still: a cushion with one gold leaf square, a knife beside it, an open leaf book behind, brush jars soft at the back, no writing anywhere">
+<div class="in">
+<img class="logo" src="assets/logo.png" alt="A gilder's cushion with one bright gold leaf square and a knife line, the name lettered under it in indigo">
+<h1>cdd-configdrift-baselinediff</h1>
+<p>The bench itself, read from left to right the way a gilder lays out work before starting. One state is laid beside another, and the join is looked at hard.</p>
+<nav>
+<a class="cushion" href="#baseline">Compare Against the Baseline</a>
+<a class="cushion" href="#controls">Show Help</a>
+<a class="cushion" href="#out">Write the Diff to a File</a>
+</nav>
+</div>
 </header>
-
 <main>
-  <section class="rail">
-    <nav aria-label="on this page">
-      <p class="mono"><a href="#run">Run it</a><br>
-      <a href="#files">The files</a><br>
-      <a href="#sheets">The sheets</a><br>
-      <a href="https://github.com/ShadowGuard-AI/cdd-configdrift-baselinediff">The repo</a></p>
-    </nav>
-    <div>
-      <p class="lede">Cdd Configdrift Baselinediff is one of my projects. The README in the repo is short, so this page sticks to what the files themselves show.</p>
-      <div class="grid">
-        <div class="card pop"><h3>What it is</h3>
-          <p>Cdd Configdrift Baselinediff: 6 files, 226 counted
-          lines across Python 203, Markdown 21, Text 2. One job, done in the
-          open, in files you can read.</p></div>
-        <div class="card pop"><h3>The biggest piece</h3>
-          <p><code>main.py</code> carries the most
-          lines. If the project grows, that file is where the growth
-          lands first, for better or worse.</p></div>
-        <div class="card pop"><h3>The honest gap</h3>
-          <p>No test files yet. That is the honest gap, and the roadmap in the visuals folder says what the first one should cover.</p></div>
-      </div>
-      <section id="run">
-        <h2>Run it</h2>
-        <p>The repo README has the exact commands for this one. The
-        shape is the shape for most of my projects: clone it, read the
-        top file first so you know what will happen, then run it on
-        something you do not mind breaking.</p>
-        <p class="mono">$ git clone https://github.com/ShadowGuard-AI/cdd-configdrift-baselinediff.git<br>$ cd cdd-configdrift-baselinediff</p>
-      </section>
-      
-  <section aria-label="real code">
-    <h2>The code, as it sits in the repo</h2>
-    <p>From <code>main.py</code>, line 80 on. I did
-    not tidy it for the page. What you see is what the file has.</p>
-    <pre class="code"><code>        return config
-
-    def _filter(data, keys):
-        # Ignoring is by bare key name at every depth. Ignoring a
-        # common name like password or host removes it from every
-        # section including ones the caller never meant, and there is
-        # no path form to aim it at just one place.
-        if isinstance(data, dict):
-            return {k: _filter(v, keys) for k, v in data.items() if k not in keys}
-        elif isinstance(data, list):
-            return [_filter(item, keys) for item in data]
-        else:
-            return data
-
-    return _filter(config, ignore_keys)
-
-def compare_configs(baseline, current, ignore_keys=None):
-    &quot;&quot;&quot;
-    Compares two configuration dictionaries and returns the diff.
-
-    Args:
-        baseline (dict): The baseline configuration.</code></pre>
-  </section>
-      <section id="files">
-        <h2>The files that matter</h2>
-        <table><tr><th>File</th><th>Lines</th></tr>
-        <tr><td><code>main.py</code></td><td>203</td></tr>
-        </table>
-        <p>Names doing the work: <span class="mono">setup_argparse, load_config, filter_config, compare_configs, format_diff, write_output, main, _filter</span>.</p>
-      </section>
-      <section id="sheets">
-        <h2>Drawn by hand</h2>
-        <p>I sketch my projects on notebook paper so I have to
-        understand them well enough to draw them. The full set,
-        with the counts and how they were counted, is the
-        <a href="https://github.com/ShadowGuard-AI/cdd-configdrift-baselinediff/tree/main/cdd-configdrift-baselinediff-Visuals">cdd-configdrift-baselinediff-Visuals</a>
-        folder in the repo. Nothing is drawn over the binder holes.
-        That is a rule, not a style.</p>
-        <div class="shots">
-          <img src="assets/architecture.png" alt="Hand drawn architecture sheet for Cdd Configdrift Baselinediff">
-          <img src="assets/flowchart.png" alt="Hand drawn flowchart sheet for Cdd Configdrift Baselinediff">
-          <img src="assets/product-map.png" alt="Hand drawn product map sheet for Cdd Configdrift Baselinediff">
-        </div>
-      </section>
-    </div>
-  </section>
+<section class="page" id="baseline"><h2>Laid Beside the Baseline</h2>
+<p>cdd-configdrift-baselinediff compares current configuration against a known good baseline, highlighting differences in a readable format, for example using diff or a similar library.</p>
+<p>The wider purpose given for this kind of tool is detecting changes in configuration files over time, so security teams can spot unauthorised modifications, deviations from established baselines, and misconfigurations that could bring in risk, tracking and highlighting differences across versions to aid troubleshooting and putting things right. Nothing is added here about file formats watched, schedules, or alerts, because the source names none of those.</p>
+<p>The baseline is the untouched leaf square still in its book. The current state is the square laid on the pad. The tool reports where the second no longer matches the first.</p>
+</section>
+<div class="stroke"></div>
+<section class="page" id="down"><h2>Taking It Down</h2>
+<pre>git clone https://github.com/ShadowStrikeHQ/cdd-configdrift-baselinediff</pre>
+<pre>./cdd-configdrift-baselinediff [params]</pre>
+<div class="tissue"><h3>Neither Side Is Named</h3>
+<p>The usage form names neither the current configuration nor the baseline it is to be compared with, although comparison between two states is the tool's whole task. A visitor learns that gap here, not after cloning.</p></div>
+<p><a href="https://github.com/ShadowGuard-AI/cdd-configdrift-baselinediff">The repository on GitHub</a></p>
+</section>
+<div class="stroke"></div>
+<section class="page" id="controls"><h2>The Six Controls</h2>
+<div class="ctl"><b>-h</b><span>Shows a help message and exits.</span></div>
+<div class="ctl"><b>--ignore</b><span>Takes a list of keys to ignore in the diff.</span></div>
+<div class="ctl"><b>--output</b><span>Gives the path to the output file for the diff, and if it is not specified the diff is printed to stdout.</span></div>
+<div class="ctl"><b>--no-color</b><span>Disables colour output.</span></div>
+<div class="ctl"><b>--format</b><span>No description provided in the source.</span></div>
+<div class="ctl"><b>--indent</b><span>No description provided in the source.</span></div>
+<div class="tissue"><h3>No Description Given</h3>
+<p>Two of the six controls, --format and --indent, arrive with no description provided. No meaning is guessed for either of them, however tempting the guesses are.</p></div>
+</section>
+<div class="stroke"></div>
+<section class="page" id="out"><h2>What Comes Out</h2>
+<p>The source promises differences highlighted in a readable format and an output file when --output is used. It gives no worked example, no sample diff, no picture of coloured output, and no test results. That absence is stated here in the same size of type as the rest, so the page does not look fuller than its source.</p>
+<p>The closing credit is reproduced as printed, with no licence named:</p>
+<pre>Copyright (c) ShadowStrikeHQ</pre>
+</section>
 </main>
-<footer>
-  <p>Cdd Configdrift Baselinediff is one of my projects. This page was written
-  from the repo itself on 2026-10-30: the counts are the
-  repo's counts, the code is the repo's code, and the gaps are the
-  repo's gaps.</p>
-</footer>
+<footer><p>Theme: Gilder's Cushion and the draught Rule. Type: Caveat Brush for headings, Bitter for reading, both SIL Open Font License 1.1. The lettering reference The Dolbak Brush was reference only and is not embedded.</p></footer>
 </body>
 </html>

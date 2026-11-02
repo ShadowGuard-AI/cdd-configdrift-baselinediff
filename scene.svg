@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" role="img" aria-label="The gilding bench in three bands: light moves along the brush jars at the back, a tissue page lifts a fraction over the leaf book, and a line of light travels once across the cushion from the untouched leaf toward the cut square, pausing at the knife">
+<rect x="0" y="0" width="1200" height="300" fill="#e9dfc8"/>
+<rect x="0" y="196" width="1200" height="104" fill="#2e2960"/>
+<rect x="0" y="188" width="1200" height="10" fill="#6b5a42"/>
+<g fill="#a89a84" stroke="#7c6f58" stroke-width="2">
+<rect x="70" y="86" width="52" height="102"/><rect x="156" y="86" width="52" height="102"/><rect x="242" y="86" width="52" height="102"/><rect x="328" y="86" width="52" height="102"/>
+</g>
+<g stroke="#785e38" stroke-width="5">
+<line x1="84" y1="88" x2="82" y2="34"/><line x1="104" y1="88" x2="106" y2="44"/><line x1="170" y1="88" x2="168" y2="30"/><line x1="190" y1="88" x2="192" y2="42"/><line x1="256" y1="88" x2="254" y2="36"/><line x1="276" y1="88" x2="278" y2="46"/><line x1="342" y1="88" x2="340" y2="32"/><line x1="362" y1="88" x2="364" y2="44"/>
+</g>
+<ellipse cx="96" cy="88" rx="70" ry="46" fill="#fff6da" opacity="0">
+<animate attributeName="cx" values="96;182;268;354;354" keyTimes="0;0.25;0.5;0.75;1" dur="18s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0;0.34;0.34;0.34;0" keyTimes="0;0.06;0.72;0.9;1" dur="18s" repeatCount="indefinite"/>
+</ellipse>
+<g>
+<polygon points="742,96 852,84 858,140 748,152" fill="#efe9d8"/>
+<polygon points="852,84 968,98 960,152 858,140" fill="#f4efe2"/>
+<polygon points="884,102 944,110 938,140 880,132" fill="#e8c33a">
+<animate attributeName="opacity" values="1;0.72;1;1" keyTimes="0;0.4;0.62;1" dur="14s" repeatCount="indefinite"/>
+</polygon>
+<path d="M858 84 L962 96" stroke="#cfc6ac" stroke-width="3" fill="none">
+<animateTransform attributeName="transform" type="rotate" values="0 858 84;-4 858 84;0 858 84;0 858 84" keyTimes="0;0.3;0.55;1" dur="14s" repeatCount="indefinite"/>
+</path>
+</g>
+<polygon points="470,176 1010,176 982,262 470,262" fill="#e4d3ae"/>
+<polygon points="470,262 982,262 982,284 470,284" fill="#baa07e"/>
+<polygon points="596,196 764,190 742,252 574,258" fill="#e8c33a"/>
+<polygon points="800,222 888,214 890,224 804,234" fill="#bababc"/>
+<line x1="888" y1="219" x2="946" y2="246" stroke="#704626" stroke-width="10"/>
+<rect x="520" y="182" width="420" height="70" fill="none" stroke="#ffeeb0" stroke-width="4" opacity="0">
+<animate attributeName="opacity" values="0;0;0.85;0.85;0;0" keyTimes="0;0.12;0.3;0.52;0.68;1" dur="16s" repeatCount="indefinite"/>
+<animate attributeName="x" values="520;560;640;820;880;880" keyTimes="0;0.12;0.3;0.52;0.68;1" dur="16s" repeatCount="indefinite"/>
+<animate attributeName="width" values="26;26;26;10;4;4" keyTimes="0;0.12;0.3;0.52;0.68;1" dur="16s" repeatCount="indefinite"/>
+</rect>
+</svg>
