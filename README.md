@@ -1,12 +1,12 @@
-![The gilding bench held still: a cushion with one gold leaf square resting on it, a knife laid beside the square, an open leaf book behind, brush jars soft at the back, no lettering anywhere](intro-banner.png)
+![The brought in piece and the standard trial plates close up side by side in the open velvet lined case, red assay marks on the nearest pieces, the assayer's gloved hand at the frame edge](intro-banner.png)
 
 > Medium noted first: gilding, gold leaf on a leather cushion, Caveat Brush in indigo on resist white, a stores list entry.
 
 # cdd-configdrift-BaselineDiff
 
-![The cushion mark: a pale pad, one bright gold leaf square, one dark knife line](logo.png)
+![A rectangular gold trial plate resting plain and unmarked in its slot in an oxblood velvet lined case, one small red assay mark stamped at its corner, the heading plate](logo.png)
 
-![The bench front with the title lettered along its edge in resist white against indigo stained wood](banner.png)
+![An assayer in gloves at a bench holding a brought in gold piece beside the open case of gold and silver trial plates, a balance and touchstones at the bench edge](banner.png)
 
 ![The bench in three bands: light moves along the brush jars, a tissue page lifts a fraction over the leaf book, and a line of light travels once across the cushion from the untouched leaf toward the cut square, pausing at the knife](scene.svg)
 
