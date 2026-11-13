@@ -10,8 +10,7 @@
 
 ![The bench in three bands: light moves along the brush jars, a tissue page lifts a fraction over the leaf book, and a line of light travels once across the cushion from the untouched leaf toward the cut square, pausing at the knife](scene.svg)
 
-# cdd-configdrift-BaselineDiff
-Compares current configuration against a known good baseline, highlighting differences in a readable format (e.g., using `diff` or similar library). - Focused on This category encompasses tools designed to detect changes in configuration files over time. This allows security teams to identify unauthorized modifications, deviations from established baselines, and potential misconfigurations that could introduce security risks. The tools track and highlight differences across versions, aiding in rapid troubleshooting and remediation.
+Compares current configuration against a known good baseline, highlighting differences in a readable format (e.g., using `diff` or similar library), focusing on tools designed to detect changes in configuration files over time. This allows security teams to identify unauthorized modifications, deviations from established baselines, and potential misconfigurations that could introduce security risks. The tools track and highlight differences across versions, aiding in rapid troubleshooting and remediation.
 
 ![A major divider: a full row of brush stroke gradient tests stepping from indigo to copper](sep-heavy.svg)
 
